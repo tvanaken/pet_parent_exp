@@ -1,7 +1,7 @@
 import random
 
 from app.db.db_manager import DBManager
-from app.models import Base, Task, User
+from app.models import Base, Task, User, Breed
 from faker import Faker
 
 fake = Faker()
@@ -34,7 +34,9 @@ def create_user():
     provider = profile["mail"].split("@")[1]
     email = "{0}@{1}".format(username, provider)
     user = User(
-        username=username, first_name=first_name, last_name=last_name, email=email
+        email=email,
+        hashed_password='12345',
+        username = username
     )
     return user
 
@@ -54,6 +56,18 @@ def create_fake_tasks(session, users, n=25):
         user = random.choice(users)
         task = create_task(user)
         session.add(task)
+    session.commit()
+
+
+
+
+def create_fake_breeds(session):
+    husky = Breed(name='Husky', suggested_supplements=None, suggested_excercise="walks")
+    session.add(husky)
+    american_eskimo = Breed(name='American Eskimo', suggested_supplements=None, suggested_excercise="running")
+    session.add(american_eskimo)
+    bulldog = Breed(name='Bulldog', suggested_supplements=None, suggested_excercise="swimming")
+    session.add(bulldog)
     session.commit()
 
 
@@ -100,6 +114,11 @@ def generate_data():
     # fake tasks:
     create_fake_tasks(session, users, n=25)
     print("{0}. creating some fake tasks...".format(step))
+    step += 1
+
+    #fake breeds
+    create_fake_breeds(session)
+    print("{0}. creating some fake breeds...".format(step))
 
     # cleanup
     db_manager.cleanup()
