@@ -1,0 +1,39 @@
+name: Pull Request Check
+
+on:
+  pull_request:
+    branches:
+      - "*"
+
+jobs:
+  pull-request-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Install Poetry
+        run: |
+          pip install poetry
+
+      - name: Check Code Quality
+        run: |
+          cd src
+          bash scripts/check.sh
+
+      - name: Run Tests
+        run: |
+          mv src app
+          cd app
+          export PYTHONPATH="/app"
+
+          # need to run ui tests first b/c server depends on ui directory
+          bash scripts/test-ui.sh
+                
+          bash scripts/test-server.sh --exclude-db

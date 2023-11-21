@@ -1,0 +1,6 @@
+__pycache__
+node_modules
+dist
+.parcel-cache
+*.pyc
+.pytest_cache
