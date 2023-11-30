@@ -1,52 +1,52 @@
 services:
-    server:
-        build:
-            context: .
-        ports:
-            - "8000:8000"
-        volumes:
-            - ./src:/app
-        depends_on:
-            ui:
-                condition: service_healthy
-            db:
-                condition: service_healthy
-        entrypoint: bash -c "poetry run python db/setup.py && poetry run uvicorn server:app --host 0.0.0.0 --reload"
+  server:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app
+    depends_on:
+      ui:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+      db_setup:
+        condition: service_healthy
+    entrypoint: bash -c "poetry run python db/setup.py && poetry run uvicorn server:app --host 0.0.0.0 --reload"
 
-    ui:
-        image: node:lts
-        ports:
-            - "1234:1234"
-        volumes:
-            - ./src/ui:/app
-            - /app/node_modules
-            - /app/.parcel-cache
-        working_dir: /app
-        healthcheck:
-            test: "ls dist"
-            timeout: 30s
-            interval: 10s
-        entrypoint: npm run watch
+  ui:
+    image: node:lts
+    ports:
+      - "1234:1234"
+    volumes:
+      - ./src/ui:/app
+      - /app/node_modules
+      - /app/.parcel-cache
+    working_dir: /app
+    healthcheck:
+      test: "ls dist"
+      timeout: 30s
+      interval: 10s
+    entrypoint: npm run watch
 
-    db:
-        image: postgres:15
-        environment:
-            - POSTGRES_PASSWORD=${PGPASSWORD}
-        healthcheck:
-            test: "psql -U postgres -h localhost -p 5432"
-            timeout: 10s
-            interval: 10s
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_PASSWORD=${PGPASSWORD}
+    healthcheck:
+      test: "psql -U postgres -h localhost -p 5432"
+      timeout: 10s
+      interval: 10s
 
-    db_setup:
-        image: postgres:15
-        build:
-            context: .
-        env_file:
-            - .env
-        volumes:
-            - ./src:/script
-        depends_on:
-            db:
-                condition: service_healthy
-        working_dir: /script
-        entrypoint: "bash ./db/db_setup.sh"
+  db_setup:
+    image: postgres:15
+    env_file:
+      - .env
+    volumes:
+      - ./src:/script
+    depends_on:
+      db:
+        condition: service_healthy
+    working_dir: /script
+    entrypoint: "bash ./db/db_setup.sh"

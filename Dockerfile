@@ -1,7 +1,7 @@
 from node:lts
 COPY ./src/ui /ui
 WORKDIR /ui
-RUN npm run build
+# RUN npm run build
 
 
 from python:3.11

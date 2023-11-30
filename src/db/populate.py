@@ -124,5 +124,5 @@ def generate_data():
     db_manager.cleanup()
 
 
-if __name__ == "__main__":
-    generate_data()
+# if __name__ == "__main__":
+#     generate_data()
