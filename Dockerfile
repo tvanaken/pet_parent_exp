@@ -6,6 +6,9 @@ RUN npm run build
 
 from python:3.11
 
+# Update package lists and install postgresql-client
+RUN apt-get update && apt-get install -y postgresql-client
+
 COPY ./src /app
 COPY --from=0 /ui/dist /app/ui/dist
 
