@@ -26,4 +26,4 @@ app.include_router(users.router)
 app.include_router(breeds.router)
 
 
-app.mount("/", StaticFiles(directory="ui/dist", html=True), name="ui")
+app.mount("/", StaticFiles(directory="ui", html=True), name="ui")
