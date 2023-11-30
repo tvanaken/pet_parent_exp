@@ -1,6 +1,6 @@
-from node:lts
-COPY ./src/ui /ui
-WORKDIR /ui
+# from node:lts
+# COPY ./src/ui /ui
+# WORKDIR /ui
 # RUN npm run build
 
 
@@ -10,7 +10,7 @@ from python:3.11
 RUN apt-get update && apt-get install -y postgresql-client
 
 COPY ./src /app
-COPY --from=0 /ui/dist /app/ui/dist
+# COPY --from=0 /ui/dist /app/ui/dist
 
 # Important: 
 #   Add "/" to python path so that the "app.*" namespace works.
