@@ -1,20 +1,10 @@
 import random
 
 from app.db.db_manager import DBManager
-from app.models import Base, Task, User, Breed
+from app.models import Base, User, Breed, Food, Pet, Reminder
 from faker import Faker
 
 fake = Faker()
-
-tasks = [
-    ["Dishes", "Do the dishes"],
-    ["Sweep", "Sweep the floor"],
-    ["Mow", "Mow the lawn"],
-    ["Trash", "Take out the trash"],
-    ["Groceries", "Buy groceries"],
-    ["Exercise", "Do some jumping jax"],
-    ["Homework", "Do SWE lab"],
-]
 
 
 def create_tables(engine):
@@ -35,8 +25,7 @@ def create_user():
     email = "{0}@{1}".format(username, provider)
     user = User(
         email=email,
-        hashed_password='12345',
-        username = username
+        password='12345',
     )
     return user
 
@@ -51,30 +40,40 @@ def create_fake_users(session, n=5):
     return users
 
 
-def create_fake_tasks(session, users, n=25):
-    for _ in range(n):
-        user = random.choice(users)
-        task = create_task(user)
-        session.add(task)
+def create_fake_reminders(session):
+    med_reminder = Reminder(user_id=1, type='Medication', frequency='Twice-a-day', start_date='2023-11-21', end_date='2023-12-10')
+    play_reminder = Reminder(user_id=1, type='play', frequency=None, start_date='2023-11-21', end_date='2023-11-21')
+    exercise_reminder = Reminder(user_id=2, type='exercise', frequency='Daily', start_date='2023-11-21', end_date=None)
+    session.add(med_reminder)
+    session.add(play_reminder)
+    session.add(exercise_reminder)
     session.commit()
 
 
+def create_fake_pets(session):
+    boo = Pet(user_id=1, breed_id=2, name='Boo', age=11, weight='25', birthday='2012-10-05')
+    session.add(boo)
+    miles = Pet(user_id=1, breed_id=1, name='Miles', age=8, weight='75', birthday='2015-03-15')
+    session.add(miles)
+    flare = Pet(user_id=1, breed_id=1, name='Flare', age=7, weight='67', birthday='2016-08-21')
+    session.add(flare)
+    session.commit()
+
+
+def create_fake_foods(session):
+    orijen_senior_dry = Food(type='dry', name='Orijen: Senior', ingredients=None, crude_protein=38, crude_fat=15, crude_fiber=8, moisture=12, dietary_starch=17, epa=0.2, calcium=1.3, phosphorus=0.9, vitamin_e=750, omega_6=3, omega_3=0.8, glucosamine=600, microorganisms=1000000)
+    session.add(orijen_senior_dry)
+    session.commit()
 
 
 def create_fake_breeds(session):
-    husky = Breed(name='Husky', suggested_supplements=None, suggested_excercise="walks")
+    husky = Breed(name='Husky', suggested_supplements=None, suggested_exercise="walks")
     session.add(husky)
-    american_eskimo = Breed(name='American Eskimo', suggested_supplements=None, suggested_excercise="running")
+    american_eskimo = Breed(name='American Eskimo', suggested_supplements=None, suggested_exercise="running")
     session.add(american_eskimo)
-    bulldog = Breed(name='Bulldog', suggested_supplements=None, suggested_excercise="swimming")
+    bulldog = Breed(name='Bulldog', suggested_supplements=None, suggested_exercise="swimming")
     session.add(bulldog)
     session.commit()
-
-
-def create_task(user):
-    dummy_task = random.choice(tasks)
-    task = Task(name=dummy_task[0], description=dummy_task[1], done=False, user=user)
-    return task
 
 
 def trigger_fastapi_reload():
@@ -111,14 +110,25 @@ def generate_data():
     users = create_fake_users(session, 5)
     step += 1
 
-    # fake tasks:
-    create_fake_tasks(session, users, n=25)
-    print("{0}. creating some fake tasks...".format(step))
+    #fake breeds
+    print("{0}. creating some fake breeds...".format(step))
+    breeds = create_fake_breeds(session)
     step += 1
 
-    #fake breeds
-    create_fake_breeds(session)
-    print("{0}. creating some fake breeds...".format(step))
+    #fake foods
+    print("{0}. creating some fake foods...".format(step))
+    foods = create_fake_foods(session)
+    step += 1
+
+    #fake pets
+    print("{0}. creating some fake pets...".format(step))
+    pets = create_fake_pets(session)
+    step += 1
+
+    #fake reminders
+    print("{0}. creating some fake reminders...".format(step))
+    reminders = create_fake_reminders(session)
+
 
     # cleanup
     db_manager.cleanup()

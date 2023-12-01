@@ -12,5 +12,15 @@ class Reminder(Base):
     user = relationship("User")
     type = Column(String)
     frequency = Column(String)
-    start_date = Column(String)
-    end_date = Column(String)
+    start_date = Column(Date)
+    end_date = Column(Date)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "type": self.type,
+            "frequency": self.frequency,
+            "start_date": self.start_date.isoformat() if self.start_date else None,
+            "end_date": self.end_date.isoformat() if self.end_date else None
+        }

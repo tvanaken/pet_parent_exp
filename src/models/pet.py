@@ -17,3 +17,14 @@ class Pet(Base):
     age = Column(Integer)
     weight = Column(Numeric(precision=5, scale=2))
     birthday = Column(Date)
+
+    def to_dict(self):
+        return{
+            "id": self.id,
+            "user_id": self.user_id,
+            "breed_id": self.breed_id,
+            "name": self.name,
+            "age": self.age,
+            "weight": str(self.weight),
+            "birthday": self.birthday.isoformat() if self.birthday else None
+        }

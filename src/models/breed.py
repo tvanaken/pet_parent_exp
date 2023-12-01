@@ -8,4 +8,4 @@ class Breed(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     suggested_supplements = Column(String)
-    suggested_excercise = Column(String)
+    suggested_exercise = Column(String)

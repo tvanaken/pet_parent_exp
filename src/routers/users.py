@@ -31,9 +31,9 @@ async def get_users():
 
 @router.post("/api/user")
 async def create_user(user: dict):
-    user = await get_current_user()
+    # user = await get_current_user()
     session = await get_session()
-    user = _validate_user(user)
+    # user = _validate_user(user)
 
     user = User(
         email=user.get("email"),

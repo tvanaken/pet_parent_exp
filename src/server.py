@@ -1,6 +1,6 @@
 from contextlib import asynccontextmanager
 
-from app.routers import tasks, users, breeds
+from app.routers import users, breeds, foods, reminders, pets
 from app.utils import get_session
 
 from fastapi import FastAPI
@@ -21,9 +21,11 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
-app.include_router(tasks.router)
 app.include_router(users.router)
 app.include_router(breeds.router)
+app.include_router(reminders.router)
+app.include_router(foods.router)
+app.include_router(pets.router)
 
 
 app.mount("/", StaticFiles(directory="ui", html=True), name="ui")
