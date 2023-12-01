@@ -44,5 +44,5 @@ class Food(Base):
             "omega_6": str(self.omega_6),
             "omega_3": str(self.omega_3),
             "glucosamine": self.glucosamine,
-            "microorganisms": self.microorganisms,
+            "microorganisms": self.microorganisms
         }

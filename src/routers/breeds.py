@@ -46,9 +46,18 @@ async def get_breeds():
 
 @router.get("/api/breeds/{name}")
 async def get_breed(name: str):
-    task = await _get_breed_name(name)
-    if task:
-        return task.to_dict()
+    breed = await _get_breed_name(name)
+    if breed:
+        return breed.to_dict()
+    else:
+        return JSONResponse(content={"message": "Not found."}, status_code=404)
+    
+
+@router.get("/api/breeds/{breed_id}")
+async def get_breed(breed_id: int):
+    breed = await _get_breed(breed_id)
+    if breed:
+        return breed.to_dict()
     else:
         return JSONResponse(content={"message": "Not found."}, status_code=404)
     

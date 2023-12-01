@@ -14,6 +14,7 @@ class Pet(Base):
     breed_id = mapped_column(Integer, ForeignKey("breeds.id"))
     breed = relationship("Breed")
     name = Column(String)
+    breed = Column(String)
     age = Column(Integer)
     weight = Column(Numeric(precision=5, scale=2))
     birthday = Column(Date)
