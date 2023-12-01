@@ -8,10 +8,10 @@ router = APIRouter()
 
 
 def _validate_user(user: dict):
-    if user.get("name") is None:
-        raise HTTPException(status_code=400, detail="Name cannot be empty")
-    if user.get("description") is None:
-        raise HTTPException(status_code=400, detail="Description cannot be empty")
+    if user.get("email") is None:
+        raise HTTPException(status_code=400, detail="Email cannot be empty")
+    if user.get("password") is None:
+        raise HTTPException(status_code=400, detail="Password cannot be empty")
     return user
 
 
@@ -33,7 +33,7 @@ async def get_users():
 async def create_user(user: dict):
     # user = await get_current_user()
     session = await get_session()
-    # user = _validate_user(user)
+    user = _validate_user(user)
 
     user = User(
         email=user.get("email"),
