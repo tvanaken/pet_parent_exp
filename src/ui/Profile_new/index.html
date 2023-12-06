@@ -138,9 +138,39 @@
                     <div class="section diet"></div>
                     <div class="section photos"></div>
                     <div class="section schedule">
+                        <button id="addReminderBtn">Create Reminder</button>
                         <div id="calendar"></div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div id="reminderFormModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form id="reminderForm">
+                    <label for="title">Title:</label>
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        required
+                    /><br /><br />
+                    <label for="start">Start Date:</label>
+                    <input
+                        type="datetime-local"
+                        id="start"
+                        name="start"
+                        required
+                    /><br /><br />
+                    <label for="end">End Date:</label>
+                    <input
+                        type="datetime-local"
+                        id="end"
+                        name="end"
+                        required
+                    /><br /><br />
+                    <input type="submit" value="Submit" />
+                </form>
             </div>
         </div>
         <script src="script.js"></script>
