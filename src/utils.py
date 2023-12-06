@@ -18,7 +18,7 @@ async def get_current_user():
     Note that user is cached in _user global variable
     """
     global _user
-    user_id = 1
+    user_id = 2
     if _user is None:
         print(f"querying database for user={user_id}...")
         session = await get_session()

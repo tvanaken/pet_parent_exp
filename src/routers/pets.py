@@ -3,7 +3,6 @@ from decimal import Decimal
 from app.models import Breed, Pet
 from app.utils import get_current_user, get_session
 from sqlalchemy import select
-from dateutil import parser
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import JSONResponse
 from routers.breeds import _get_breed_name
@@ -11,7 +10,7 @@ from routers.breeds import _get_breed_name
 router = APIRouter()
 
 
-def _validate_pet(pet: dict):
+async def _validate_pet(pet: dict):
     if pet.get("name") is None:
         raise HTTPException(status_code=400, detail="Name cannot be empty")
     if pet.get("breed") is None:
@@ -62,7 +61,7 @@ async def get_pet(pet_id: int):
 async def create_pet(pet: dict):
     user = await get_current_user()
     session = await get_session()
-    pet = _validate_pet(pet)
+    pet = await _validate_pet(pet)
     breed = await _get_breed_name(pet.get("breed"))
 
     birthday_str = pet.get("birthday")
