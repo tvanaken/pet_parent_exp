@@ -200,28 +200,3 @@ Go into src/ui and enter:
 ```
 npm run lint
 ```
-
-## Application Developers
-
-| Name | GitHub Username |
-|--|--|
-| Mason Bradley | @mbradle07 |
-| Alex Clark | @aclark1997 |
-| Jackson Coley | @jcoley1 |
-| Taylor Fields | @36-Chambers |
-| Haley Grant | @hgrant2 |
-| Taylor Hodges | @Christian-Hodges |
-| Hayden Holbrook | @hholb |
-| Nicholas Howe | @nghowe |
-| Chris Hooke | @BACONWRAP |
-| Anthony Mason| @Amason-0224 |
-| Tom Philipps | @tomphlpp |
-| Semmy Purewal | @semmypurewal |
-| Will Shamblin | @wcshamblin |
-|Seth Satterwhite | ssatterw@unca.edu |
-| Kamren Sims | @ksims20 |
-| Taylor Van Aken | @tvanaken |
-| Sarah Van Wart | @vanwars |
-| Drew Yost | @dsyost |
-
-```
