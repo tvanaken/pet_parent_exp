@@ -67,15 +67,13 @@ document
         document.getElementById("reminderFormModal").style.display = "block";
     });
 
-// Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks on <span> (x), close the modal
 span.onclick = function () {
     document.getElementById("reminderFormModal").style.display = "none";
 };
 
-// Handle Form Submission
+// Form Submission
 document
     .getElementById("reminderForm")
     .addEventListener("submit", async function (event) {
