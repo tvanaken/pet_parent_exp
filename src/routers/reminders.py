@@ -60,13 +60,13 @@ async def create_reminder(reminder: dict):
     # if reminder:
     start_str = reminder.get("start")
     if start_str:
-        start = datetime.strptime(start_str, "%Y-%m-%dT%H:%M").date()
+        start = datetime.strptime(start_str, "%Y-%m-%dT%H:%M")
     else:
         start = None
 
     end_str = reminder.get("end")
     if end_str:
-        end = datetime.strptime(end_str, "%Y-%m-%dT%H:%M").date()
+        end = datetime.strptime(end_str, "%Y-%m-%dT%H:%M")
     else:
         end = None
 
@@ -108,14 +108,14 @@ async def update_reminder(reminder_id: int, reminder_updates: dict):
     if reminder_updates.get("start") is not None:
         start_str = reminder_updates.get("start")
         if start_str:
-            start = datetime.strptime(start_str, "%Y-%m-%dT%H:%M").date()
+            start = datetime.strptime(start_str, "%Y-%m-%dT%H:%M")
         else:
             start = None
         reminder.start = start
     if reminder_updates.get("end") is not None:
         end_str = reminder_updates.get("end")
         if end_str:
-            end = datetime.strptime(end_str, "%Y-%m-%dT%H:%M").date()
+            end = datetime.strptime(end_str, "%Y-%m-%dT%H:%M")
         else:
             end = None
         reminder.end = end
