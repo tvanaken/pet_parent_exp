@@ -41,7 +41,7 @@ def create_fake_users(session, n=5):
 
 
 def create_fake_reminders(session):
-    med_reminder = Reminder(user_id=1, title='Medication', start='2023-12-10', end='2023-12-10')
+    med_reminder = Reminder(user_id=1, title='Medication', start='2023-12-10T07:00', end='2023-12-10T08:30')
     play_reminder = Reminder(user_id=1, title='play', start='2023-12-05', end='2023-12-05')
     exercise_reminder = Reminder(user_id=2, title='exercise', start='2023-12-21', end='2023-12-23')
     session.add(med_reminder)
@@ -63,8 +63,6 @@ def create_fake_pets(session):
 def create_fake_foods(session):
     orijen_senior_dry = Food(type='dry', name='Orijen: Senior', ingredients=None, crude_protein=38, crude_fat=15, crude_fiber=8, moisture=12, dietary_starch=17, epa=0.2, calcium=1.3, phosphorus=0.9, vitamin_e=750, omega_6=3, omega_3=0.8, glucosamine=600, microorganisms=1000000)
     session.add(orijen_senior_dry)
-    purina_pro_plan = Food(type='dry', name='Purina Pro Plan Complete Essentials Adult Dry Dog Food - High Protein, Probiotics, Beef & Rice', ingredients='Beef, Rice, Whole Grain Wheat, Corn Gluten Meal, Poultry By-product Meal (Source Of Glucosamine), Soybean Meal, Whole Grain Corn, Beef Fat Preserved With Mixed-tocopherols, Dried Egg Product, Dried Beet Pulp, Fish Meal (Source Of Glucosamine), Natural Flavor, Glycerin, Calcium Carbonate, Wheat Bran, Mono And Dicalcium Phosphate, Soybean Oil, Salt, Potassium Chloride, Vitamins [Vitamin E Supplement, Niacin (Vitamin B-3), Vitamin A Supplement, Calcium Pantothenate (Vitamin B-5), Thiamine Mononitrate (Vitamin B-1), Vitamin B-12 Supplement, Riboflavin Supplement (Vitamin B-2), Pyridoxine Hydrochloride (Vitamin B-6), Folic Acid (Vitamin B-9), Vitamin D-3 Supplement, Menadione Sodium Bisulfite Complex (Vitamin K), Biotin (Vitamin B-7)], Minerals [Zinc Proteinate, Manganese Proteinate, Ferrous Sulfate, Copper Proteinate, Calcium Iodate, Sodium Selenite], Choline Chloride, L-ascorbyl-2-polyphosphate (Vitamin C), Dried Bacillus Coagulans Fermentation Product, Garlic Oil. P446919', crude_protein=26, crude_fat=16, crude_fiber=3, moisture=12, dietary_starch=None, epa=None, calcium=1, phosphorus=0.8, vitamin_e=460, omega_6=1.5, omega_3=None, glucosamine=400, microorganisms=600000000)
-    session.add(purina_pro_plan)
     session.commit()
 
 

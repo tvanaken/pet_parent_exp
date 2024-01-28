@@ -198,7 +198,7 @@ a {
     color: black;
 }
 
-.reminder-form {
+.modal {
     display: none;
     position: fixed;
     z-index: 1;
@@ -212,7 +212,7 @@ a {
     padding-top: 60px;
 }
 
-.reminder-form-content {
+.modal-content {
     background-color: #fefefe;
     margin: 5% auto;
     padding: 20px;
@@ -220,7 +220,7 @@ a {
     width: 80%;
 }
 
-.reminder-form-content span {
+.modal-content span {
     cursor: pointer;
 }
 
